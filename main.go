@@ -136,7 +136,7 @@ func main() {
 	}()
 
 	rng := rand.New(rand.NewSource(1))
-	const Scale = 0.1
+	const Scale = 0.01
 
 	type Network struct {
 		Set    tf64.Set
@@ -154,12 +154,13 @@ func main() {
 			width := img.Gray.Bounds().Max.X
 			height := img.Gray.Bounds().Max.Y
 			Width = width * height
+			fmt.Println("width", width)
 			networks = make([]Network, 3)
 			for n := range networks {
 				set := tf64.NewSet()
-				set.Add("w1", Width, Width-2)
-				set.Add("b1", Width-2)
-				set.Add("w2", Width-2, Width)
+				set.Add("w1", Width, Width/2)
+				set.Add("b1", Width/2)
+				set.Add("w2", Width/2, Width)
 				set.Add("b2", Width)
 
 				for i := range set.Weights {
